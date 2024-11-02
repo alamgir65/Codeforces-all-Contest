@@ -28,23 +28,41 @@ using namespace __gnu_pbds;
  
 template <typename T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 void solve(){
-    int n; cin>>n;
-    vii a(n),b(n),tmp;
-    for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<n;i++) cin>>b[i];
-    ll sum=0,cnt=0;
-    for(int i=0;i<n;i++){
-        if(a[i]==b[i]) cnt++;
-        else if(a[i]<b[i]){
-            tmp.pb(b[i]-a[i]);
+    string s;
+    cin >> s;
+    int q;
+    cin >> q;
+    
+    int n = s.size();
+    int count_1100 = 0;
+    for (int i = 0; i <= n - 4; i++) {
+        if (s.substr(i, 4) == "1100") {
+            count_1100++;
         }
-        sum += min(a[i],b[i]);
     }
-    int sz=tmp.size();
-    if(sz%2==1 && cnt==0){
-        sum += tmp[0];
+
+    while (q--) {
+        int i;
+        char v;
+        cin >> i >> v;
+        i--; 
+        for (int j = max(0, i - 3); j <= min(n - 4, i); j++) {
+            if (s.substr(j, 4) == "1100") {
+                count_1100--;
+            }
+        }
+        s[i] = v;
+        for (int j = max(0, i - 3); j <= min(n - 4, i); j++) {
+            if (s.substr(j, 4) == "1100") {
+                count_1100++;
+            }
+        }
+        if (count_1100 > 0) {
+            yes
+        } else {
+            no
+        }
     }
-    out(sum)
 }
 love{
     Alamgir

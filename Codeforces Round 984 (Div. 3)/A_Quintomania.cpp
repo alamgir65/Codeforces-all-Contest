@@ -29,22 +29,15 @@ using namespace __gnu_pbds;
 template <typename T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 void solve(){
     int n; cin>>n;
-    vii a(n),b(n),tmp;
+    vii a(n);
     for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<n;i++) cin>>b[i];
-    ll sum=0,cnt=0;
-    for(int i=0;i<n;i++){
-        if(a[i]==b[i]) cnt++;
-        else if(a[i]<b[i]){
-            tmp.pb(b[i]-a[i]);
-        }
-        sum += min(a[i],b[i]);
+    bool flag=true;
+    for(int i=1;i<n;i++){
+        int d=abs(a[i]-a[i-1]);
+        if(d!=5 && d!=7) flag=false;
     }
-    int sz=tmp.size();
-    if(sz%2==1 && cnt==0){
-        sum += tmp[0];
-    }
-    out(sum)
+    if(flag) yes
+    else no
 }
 love{
     Alamgir
